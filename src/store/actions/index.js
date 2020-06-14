@@ -30,15 +30,16 @@ export const update = (val,next)=>async (dispatch)=>{
    next();
 }
 
-export const getUsers = (next)=>async (dispatch)=>{
-    const response =  await axios.get(config.getUsers,{headers:{ 'Content-Type': 'application/json', 'Authorization': `${token}` }})
+export const getUsers = (token1,next)=>async (dispatch)=>{
+    console.log("token",token1)
+    const response =  await axios.get(config.getUsers,{headers:{ 'Content-Type': 'application/json', 'Authorization': `${token1}` }})
     const data = response.data.response
     dispatch({type:'GET_USERS',payload:data})
     next();
  }
 
-export const sendMail = (to,next)=>async (dispatch)=>{
-   const response =  await axios.post(config.sendMail,to,{headers:{ 'Content-Type': 'application/json', 'Authorization': `${token}` }})
+export const sendMail = (to,token1,next)=>async (dispatch)=>{
+   const response =  await axios.post(config.sendMail,to,{headers:{ 'Content-Type': 'application/json', 'Authorization': `${token1}` }})
    const data = response.data
    dispatch({type:'SEND_MAIL',payload:data})
    next();
